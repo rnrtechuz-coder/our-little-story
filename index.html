@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FAF6F1" />
+    <title>Наша маленькая история 💕</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Caveat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+    <!-- Плавающие частицы (фон) -->
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Музыкальный плеер -->
+    <div class="music-player" id="musicPlayer" hidden>
+      <button class="music-btn" id="musicToggle" type="button" aria-label="Играть музыку">
+        <svg id="musicIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </button>
+      <div class="music-track">
+        <span class="music-eyebrow">НАША МУЗЫКА</span>
+        <span class="music-title">Наша песня</span>
+        <span class="music-status" id="musicStatus" aria-live="polite">Загружаем…</span>
+      </div>
+      <div class="music-volume-wrap">
+        <span class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.01" value="0.5" aria-label="Громкость музыки" />
+      </div>
+      <audio id="audioEl" autoplay preload="auto" loop></audio>
+    </div>
+
+    <!-- Плавающая кнопка "порция милоты" -->
+    <button class="floating-love-btn" id="floatingLoveBtn">
+      <span>💌</span>
+      <span class="floating-love-label">Мне нужна порция милоты</span>
+    </button>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero section" id="hero">
+      <div class="hero-inner">
+        <div class="hero-text reveal">
+          <span class="section-label">Наша маленькая история</span>
+          <h1 class="hero-title">Две недели <em>нас</em>.</h1>
+          <p class="hero-date">14 октября 2026 — день, когда началась наша история.</p>
+          <p class="hero-subtitle">
+            И как-то так получилось, что за такое короткое время ты стала одной из моих любимых частей каждого дня.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn btn-primary" id="openWorldBtn">
+              Открыть наш маленький мир
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+            <button class="btn btn-ghost" id="surpriseHeroBtn">Маленький сюрприз для тебя</button>
+          </div>
+        </div>
+        <div class="hero-photo reveal reveal-delay">
+          <div class="photo-frame photo-frame-hero" id="heroFrame">
+            <img id="heroImage" alt="Наше фото" />
+            <div class="hero-photo-empty" id="heroPhotoEmpty">
+              <span aria-hidden="true">♡</span>
+              <p>Здесь появится наше фото</p>
+              <small>Добавь снимок в галерею ниже</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COUNTER ============ -->
+    <section class="section counter-section" id="counter">
+      <div class="reveal">
+        <span class="section-label">Наш счётчик</span>
+        <h2 class="section-title">Каждая секунда с тобой — это маленькое счастье.</h2>
+      </div>
+
+      <div class="counter-grid reveal reveal-delay">
+        <div class="counter-card">
+          <span class="counter-value" id="countDays">0</span>
+          <span class="counter-label">дней вместе</span>
+        </div>
+        <div class="counter-card">
+          <span class="counter-value" id="countHours">0</span>
+          <span class="counter-label">часов</span>
+        </div>
+        <div class="counter-card">
+          <span class="counter-value" id="countMinutes">0</span>
+          <span class="counter-label">минут</span>
+        </div>
+        <div class="counter-card">
+          <span class="counter-value" id="countSeconds">0</span>
+          <span class="counter-label">секунд</span>
+        </div>
+      </div>
+
+      <div class="milestone-banner" id="milestoneBanner" hidden>
+        <div class="milestone-sparkle"></div>
+        <h3 class="milestone-title">14 ДНЕЙ ВМЕСТЕ</h3>
+        <p class="milestone-sub">С двумя неделями нас, любимая.</p>
+      </div>
+
+      <div class="next-anniversary" id="nextAnniversary"></div>
+    </section>
+
+    <!-- ============ PHOTO GALLERY ============ -->
+    <section class="section gallery-section" id="gallery">
+      <div class="reveal">
+        <span class="section-label">Наш маленький фото-мир</span>
+        <h2 class="section-title">Моменты, которые хочется сохранить.</h2>
+        <p class="section-subtitle">Нажми на любое фото — и оно откроется во весь экран.</p>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- заполняется из JS -->
+      </div>
+
+      <div class="gallery-empty" id="galleryEmpty" hidden>
+        <div class="empty-frame">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          <h3>Здесь скоро будут наши фотографии</h3>
+          <p>Положи фото в папку <code>public/images/us/</code> и добавь их в <code>data.js</code> в массив <code>photos</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+      <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Предыдущее">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="lightbox-content">
+        <img id="lightboxImg" alt="" />
+        <p class="lightbox-caption" id="lightboxCaption"></p>
+      </div>
+      <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Следующее">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+
+    <!-- ============ COMPLIMENTS ============ -->
+    <section class="section compliments-section" id="compliments">
+      <div class="reveal">
+        <span class="section-label">То, за что я тебя люблю</span>
+        <h2 class="section-title">Маленькие записки о тебе.</h2>
+        <p class="section-subtitle">Нажми на конверт — и внутри окажется что-то тёплое.</p>
+      </div>
+
+      <div class="compliments-stage reveal reveal-delay">
+        <button class="envelope" id="envelope" type="button" aria-label="Открыть комплимент">
+          <div class="envelope-flap"></div>
+          <div class="envelope-body">
+            <span class="envelope-heart">💌</span>
+            <span class="envelope-hint">Нажми, чтобы открыть</span>
+          </div>
+        </button>
+
+        <div class="compliment-card" id="complimentCard" aria-live="polite" hidden>
+          <p class="compliment-text" id="complimentText"></p>
+          <button class="btn btn-ghost" id="nextComplimentBtn">Ещё один комплимент</button>
+        </div>
+
+        <div class="compliments-progress" id="complimentsProgress"></div>
+      </div>
+    </section>
+
+    <!-- ============ PICKUP LINES ============ -->
+    <section class="section pickup-section" id="pickup">
+      <div class="reveal">
+        <span class="section-label">Немножко подкатов</span>
+        <h2 class="section-title">Уголок, где я милый и немного наглый.</h2>
+      </div>
+
+      <div class="pickup-card reveal reveal-delay">
+        <div class="pickup-day" id="pickupDay">
+          <span class="pickup-day-label">Подкат дня</span>
+          <p class="pickup-day-text" id="pickupDayText"></p>
+        </div>
+
+        <div class="divider"><span>♡</span></div>
+
+        <p class="pickup-current" id="pickupCurrent" aria-live="polite">Нажми кнопку — и получишь новую порцию.</p>
+
+        <div class="pickup-actions">
+          <button class="btn btn-primary" id="newPickupBtn">Новый подкат</button>
+          <button class="btn btn-ghost" id="favPickupBtn" title="Сохранить в избранное">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            В избранное
+          </button>
+          <button class="btn btn-ghost" id="copyPickupBtn" title="Скопировать">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Скопировать
+          </button>
+        </div>
+
+        <div class="pickup-favorites" id="pickupFavorites" hidden>
+          <h4>Избранные подкаты</h4>
+          <ul id="pickupFavList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LOVE LETTER ============ -->
+    <section class="section letter-section" id="letter">
+      <div class="reveal">
+        <span class="section-label">Письмо</span>
+        <h2 class="section-title">Если бы я мог сказать тебе всё.</h2>
+      </div>
+
+      <div class="letter-stage reveal reveal-delay">
+        <button class="letter-envelope" id="letterEnvelope" type="button" aria-label="Открыть письмо">
+          <div class="letter-flap"></div>
+          <div class="letter-body">
+            <span class="letter-seal">♡</span>
+            <span class="letter-hint">Нажми, чтобы открыть письмо</span>
+          </button>
+        </div>
+
+        <div class="letter-paper" id="letterPaper" hidden>
+          <div class="letter-content" id="letterContent"></div>
+          <p class="letter-signature" id="letterSignature"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OPEN WHEN ============ -->
+    <section class="section openwhen-section" id="openwhen">
+      <div class="reveal">
+        <span class="section-label">Открой, когда…</span>
+        <h2 class="section-title">Маленькие письма на разные случаи.</h2>
+        <p class="section-subtitle">Выбери конверт — и внутри будет то, что нужно именно сейчас.</p>
+      </div>
+
+      <div class="openwhen-grid reveal reveal-delay" id="openwhenGrid">
+        <!-- заполняется из JS -->
+      </div>
+    </section>
+
+    <!-- Модалка для Open When -->
+    <div class="modal" id="openwhenModal" role="dialog" aria-modal="true" aria-labelledby="openwhenTitle" hidden>
+      <div class="modal-card">
+        <button class="modal-close" id="openwhenClose" aria-label="Закрыть">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <h3 class="modal-title" id="openwhenTitle"></h3>
+        <div class="modal-body" id="openwhenBody"></div>
+      </div>
+    </div>
+
+    <!-- ============ TIMELINE ============ -->
+    <section class="section timeline-section" id="timeline">
+      <div class="reveal">
+        <span class="section-label">Наша линия</span>
+        <h2 class="section-title">С самого начала — и дальше.</h2>
+      </div>
+
+      <div class="timeline reveal reveal-delay" id="timelineList">
+        <!-- заполняется из JS -->
+      </div>
+    </section>
+
+    <!-- ============ WHY YOU ============ -->
+    <section class="section whyyou-section" id="whyyou">
+      <div class="reveal">
+        <span class="section-label">Один важный вопрос</span>
+        <h2 class="section-title">Почему именно ты?</h2>
+      </div>
+
+      <div class="whyyou-stage reveal reveal-delay">
+        <button class="btn btn-primary whyyou-btn" id="whyyouBtn">Нажми и узнаешь</button>
+        <div class="whyyou-answer" id="whyyouAnswer" hidden>
+          <p id="whyyouText"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SECRET SURPRISE ============ -->
+    <section class="section surprise-section" id="surprise">
+      <div class="reveal">
+        <span class="section-label">И ещё кое-что…</span>
+        <h2 class="section-title">У меня для тебя кое-что есть.</h2>
+      </div>
+
+      <div class="surprise-stage reveal reveal-delay">
+        <button class="btn btn-primary" id="openSurpriseBtn">Открыть сюрприз</button>
+      </div>
+    </section>
+
+    <!-- Оверлей сюрприза -->
+    <div class="surprise-overlay" id="surpriseOverlay" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle" hidden>
+      <div class="surprise-content">
+        <div class="surprise-hearts" id="surpriseHearts"></div>
+        <h2 class="surprise-title" id="surpriseTitle">С нашими двумя неделями, любимая.</h2>
+        <p class="surprise-text">
+          14 октября — наше начало.<br />
+          28 октября — наши первые две недели.<br />
+          А дальше пусть будет ещё больше дней, которые мы захотим запомнить.
+        </p>
+        <button class="btn btn-ghost" id="surpriseBackBtn">Вернуться к нашим фотографиям</button>
+      </div>
+    </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+      <p class="handwritten">Сделано с любовью. Для тебя.</p>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
