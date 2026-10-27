@@ -17,11 +17,11 @@ const CONFIG = {
 //    size    — "tall" | "wide" | "square" (необязательно, по умолчанию "square")
 // ============================================================
 const photos = [
-  { src: 'public/images/us/photo-01.jpg', caption: 'Момент, который хочется оставить.', size: 'tall' },
-  { src: 'public/images/us/photo-02.jpg', caption: 'Одно из моих любимых воспоминаний.', size: 'tall' },
-  { src: 'public/images/us/photo-03.jpg', caption: 'Мы — ровно такие, какие есть.', size: 'tall' },
-  { src: 'public/images/us/photo-04.jpg', caption: 'Ещё много таких дней впереди.', size: 'tall' },
-  { src: 'public/images/us/photo-05.jpg', caption: 'Просто ты. И этого уже достаточно.', size: 'tall' },
+  { src: 'images/us/photo-01.jpg', caption: 'Момент, который хочется оставить.', size: 'tall' },
+  { src: 'images/us/photo-02.jpg', caption: 'Одно из моих любимых воспоминаний.', size: 'tall' },
+  { src: 'images/us/photo-03.jpg', caption: 'Мы — ровно такие, какие есть.', size: 'tall' },
+  { src: 'images/us/photo-04.jpg', caption: 'Ещё много таких дней впереди.', size: 'tall' },
+  { src: 'images/us/photo-05.jpg', caption: 'Просто ты. И этого уже достаточно.', size: 'tall' },
 ];
 
 // ============================================================
