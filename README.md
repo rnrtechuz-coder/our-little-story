@@ -45,3 +45,4 @@ const photos = [
 
 Для временного деплоя также можно выполнить `npx vercel` из папки проекта и следовать подсказкам CLI.
 # our-little-story
+# our-little-story
