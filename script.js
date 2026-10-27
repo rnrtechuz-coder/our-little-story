@@ -596,7 +596,7 @@
     const status = $('#musicStatus');
     const volume = $('#musicVolume');
 
-    audio.src = 'public/audio/our-song.mp3';
+    audio.src = 'audio/our-song.mp3';
     audio.volume = parseFloat(volume.value);
 
     audio.addEventListener('canplay', () => {
